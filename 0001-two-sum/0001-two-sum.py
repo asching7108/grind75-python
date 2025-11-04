@@ -7,3 +7,6 @@ class Solution:
                 return [i, hashmap[complement]]
             hashmap[nums[i]] = i
         return []
+
+# Time complexity: O(n)
+# Space complexity: O(n)
