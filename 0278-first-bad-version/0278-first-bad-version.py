@@ -14,3 +14,6 @@ class Solution:
                 lo = mid + 1
 
         return lo
+
+# Time complexity: O(log n)
+# Space complexity: O(1)
