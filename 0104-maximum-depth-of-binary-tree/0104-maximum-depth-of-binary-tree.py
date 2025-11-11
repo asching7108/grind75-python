@@ -11,7 +11,8 @@ class Solution:
 
         leftDepth = self.maxDepth(root.left)
         rightDepth = self.maxDepth(root.right)
+
         return max(leftDepth, rightDepth) + 1
 
 # Time complexity: O(n)
-# Space complexity: O(n)
+# Space complexity: worst case O(n), best case O(log n)
