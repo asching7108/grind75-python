@@ -1,5 +1,6 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
+        # Manual implementation
         # majority = len(nums) // 2
         # counter = {}
 
