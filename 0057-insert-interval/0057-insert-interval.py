@@ -1,27 +1,24 @@
 class Solution:
-    def hasOverlap(self, i1: List[int], i2: List[int]) -> bool:
-        # the start of the later interval <= the end of the earlier interval
-        return max(i1[0], i2[0]) <= min(i1[1], i2[1])
-
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        n = len(intervals)
+        i = 0
         res = []
-        [newStart, newEnd] = newInterval
 
-        for i, [start, end] in enumerate(intervals):
-            if end < newStart:
-                res.append([start, end])
-            elif start > newEnd:
-                res.append([newStart, newEnd])
-                return res + intervals[i:]
-            else:
-                [newStart, newEnd] = [
-                    min(start, newStart),
-                    max(end, newEnd)
-                ]
-            print([newStart, newEnd])
+        while i < n and intervals[i][1] < newInterval[0]:
+            res.append(intervals[i])
+            i += 1
 
-        if newStart or newEnd:
-            res.append([newStart, newEnd])
+        while i < n and newInterval[1] >= intervals[i][0]:
+            newInterval = [
+                min(intervals[i][0], newInterval[0]),
+                max(intervals[i][1], newInterval[1]),
+            ]
+            i += 1
+        res.append(newInterval)
+
+        while i < n:
+            res.append(intervals[i])
+            i += 1
 
         return res
 
