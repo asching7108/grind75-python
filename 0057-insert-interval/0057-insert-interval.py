@@ -7,20 +7,21 @@ class Solution:
         res = []
         [newStart, newEnd] = newInterval
 
-        for i, interval in enumerate(intervals):
-            if not self.hasOverlap(interval, newInterval):
-                if newInterval[0] < interval[0]:
-                    res.append(newInterval)
-                    return res + intervals[i:]
-                res.append(interval)
+        for i, [start, end] in enumerate(intervals):
+            if end < newStart:
+                res.append([start, end])
+            elif start > newEnd:
+                res.append([newStart, newEnd])
+                return res + intervals[i:]
             else:
-                newInterval = [
-                    min(interval[0], newInterval[0]),
-                    max(interval[1], newInterval[1])
+                [newStart, newEnd] = [
+                    min(start, newStart),
+                    max(end, newEnd)
                 ]
+            print([newStart, newEnd])
 
-        if newInterval:
-            res.append(newInterval)
+        if newStart or newEnd:
+            res.append([newStart, newEnd])
 
         return res
 
