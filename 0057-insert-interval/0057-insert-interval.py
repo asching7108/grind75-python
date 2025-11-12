@@ -11,7 +11,7 @@ class Solution:
             if not self.hasOverlap(interval, newInterval):
                 if newInterval[0] < interval[0]:
                     res.append(newInterval)
-                    return res += intervals[i:]
+                    return res + intervals[i:]
                 res.append(interval)
             else:
                 newInterval = [
