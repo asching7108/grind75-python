@@ -1,28 +1,23 @@
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
-        def compute(val1: int, val2: int, operation: str) -> int:
-            match operation:
-                case "+":
-                    return val1 + val2
-                case "-":
-                    return val1 - val2
-                case "*":
-                    return val1 * val2
-                case "/":
-                    return trunc(val1 / val2)
- 
-        operations = set(["+", "-", "*", "/"])
+        operations = {
+            "+": lambda a, b: a + b,
+            "-": lambda a, b: a - b,
+            "*": lambda a, b: a * b,
+            "/": lambda a, b: int(a / b)
+        }
+
         stack = []
 
         for curr in tokens:
             if curr not in operations:
                 stack.append(int(curr))
             else:
-                right = stack.pop()
-                left = stack.pop()
-                stack.append(compute(left, right, curr))
+                val2 = stack.pop()
+                val1 = stack.pop()
+                stack.append(operations[curr](val1, val2))
 
-        return stack[0]
+        return stack.pop()
 
 # Time complexity: O(n)
 # Space complexity: O(n)
