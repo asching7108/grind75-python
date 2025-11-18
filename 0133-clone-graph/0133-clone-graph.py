@@ -8,22 +8,45 @@ class Node:
 
 from typing import Optional
 class Solution:
-    def __init__(self):
-        self.visited = {}
+    # Recursive DFS
+    # def __init__(self):
+    #     self.visited = {}
 
+    # def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+    #     if not node:
+    #         return node
+
+    #     if node in self.visited:
+    #         return self.visited[node]
+
+    #     newNode = Node(node.val)
+    #     self.visited[node] = newNode
+
+    #     newNode.neighbors = [self.cloneGraph(n) for n in node.neighbors]
+
+    #     return newNode
+
+    # Time complexity: O(n + m) where n is the number of nodes and n is the number of edges.
+    # Space complexity: O(n)
+
+    # Iterative BFS
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
         if not node:
             return node
 
-        if node in self.visited:
-            return self.visited[node]
-
         newNode = Node(node.val)
-        self.visited[node] = newNode
+        queue = deque([node])
+        visited = { node: newNode }
 
-        newNode.neighbors = [self.cloneGraph(n) for n in node.neighbors]
+        while queue:
+            curr = queue.popleft()
+            for n in curr.neighbors:
+                if n not in visited:
+                    visited[n] = Node(n.val)
+                    queue.append(n)
+                visited[curr].neighbors.append(visited[n])
 
         return newNode
 
-# Time complexity: O(n + m) where n is the number of nodes and n is the number of edges.
-# Space complexity: O(n)
+    # Time complexity: O(n + m) where n is the number of nodes and n is the number of edges.
+    # Space complexity: O(n)
