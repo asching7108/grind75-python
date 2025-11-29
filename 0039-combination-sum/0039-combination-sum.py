@@ -12,7 +12,7 @@ class Solution:
                 results.append(list(comb))
                 return
 
-            if remain < 0:
+            if remain < 0 or remain < candidates[start]:
                 return
 
             for i in range(start, len(candidates)):
