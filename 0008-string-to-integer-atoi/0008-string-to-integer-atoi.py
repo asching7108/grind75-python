@@ -23,8 +23,8 @@ class Solution:
             i += 1
 
         # Remove leading 0s
-        while i < len(s) and s[i] == '0':
-            i += 1
+        # while i < len(s) and s[i] == '0':
+        #     i += 1
 
         # Read digits
         while i < len(s) and s[i].isdigit():
@@ -32,7 +32,7 @@ class Solution:
 
             # Check overflow and underflow conditions
             if (res > INT_MAX // 10) or (
-                res == INT_MAX // 10 and digit > int_MAX % 10
+                res == INT_MAX // 10 and digit > INT_MAX % 10
             ):
                 return INT_MAX if sign == 1 else INT_MIN
 
