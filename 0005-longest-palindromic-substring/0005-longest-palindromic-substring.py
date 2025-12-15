@@ -1,21 +1,22 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         n = len(s)
-        ans = ''
+        ans = [0, 0]
 
-        def findPalindrome(left, right) -> str:
+        def expand(left, right) -> int:
             while left >= 0 and right < n and s[left] == s[right]:
                 left -= 1
                 right += 1
 
-            return s[left + 1:right]
+            return [left + 1, right - 1]
 
         # Find the longest palindrome starting from each char as center
         for i in range(1, n):
-            # Palindrome length is even
-            ans = max([ans, findPalindrome(i - 1, i), findPalindrome(i, i)], key=len)
+            left, right = max(expand(i - 1, i), expand(i, i), key=lambda s: s[1] - s[0])
+            if right - left > ans[1] - ans[0]:
+                ans = [left, right]
 
-        return ans
+        return s[ans[0]:ans[1] + 1]
 
 # Time complexity: O(n)
 # Space complexity: O(1)
