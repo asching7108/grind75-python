@@ -12,11 +12,9 @@ class Solution:
 
         # Find the longest palindrome starting from each char as center
         for i in range(1, n):
-            left, right = max(expand(i - 1, i), expand(i, i), key=lambda s: s[1] - s[0])
-            if right - left > ans[1] - ans[0]:
-                ans = [left, right]
+            ans = max([ans, expand(i - 1, i), expand(i, i)], key=lambda s: s[1] - s[0])
 
         return s[ans[0]:ans[1] + 1]
 
-# Time complexity: O(n)
+# Time complexity: O(n^2)
 # Space complexity: O(1)
