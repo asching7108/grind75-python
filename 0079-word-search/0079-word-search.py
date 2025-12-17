@@ -3,7 +3,7 @@ class Solution:
         m, n = len(board), len(board[0])
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
-        def dfs(row, col, path):
+        def backtrack(row, col, path):
             if len(path) == len(word):
                 return True
 
@@ -15,7 +15,7 @@ class Solution:
             ):
                 path.append((row, col))
                 for y, x in directions:
-                    if dfs(row + y, col + x, path):
+                    if backtrack(row + y, col + x, path):
                         return True
                 path.pop()
 
@@ -23,7 +23,10 @@ class Solution:
             
         for row in range(m):
             for col in range(n):
-                if dfs(row, col, []):
+                if backtrack(row, col, []):
                     return True
 
         return False
+
+# Time complexity: O(m * n * 3^l) where l is the length of the word to be matched
+# Space complexity: O(l) for the recursion stack
