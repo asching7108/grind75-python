@@ -4,7 +4,6 @@ class Solution:
         directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
         def dfs(row, col, path):
-            print(path + [(row,col)])
             if len(path) == len(word):
                 return True
 
@@ -18,6 +17,7 @@ class Solution:
                 for y, x in directions:
                     if dfs(row + y, col + x, path):
                         return True
+                path.pop()
 
             return False
             
