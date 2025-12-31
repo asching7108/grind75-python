@@ -6,29 +6,35 @@ class Solution:
             return ''
 
         count = Counter(t)
-        left = right = 0
         remains = len_t
-        res = ''
+        # Initialize two pointers left and right to form a sliding window
+        l, r = 0, 0
+        ans = ''
 
-        if s[right] in count:
-            count[s[right]] -= 1
-            if count[s[right]] >= 0:
-                remains -= 1
+        while r < len_s:
+            ch = s[r]
+            # Update count with the char at the right pointer
+            if ch in count:
+                count[ch] -= 1
+                if count[ch] >= 0:
+                    remains -= 1
 
-        while left <= len_s - len_t and right <= len_s:
-            if remains > 0:
-                right += 1
-                if right < len_s and s[right] in count:
-                    count[s[right]] -= 1
-                    if count[s[right]] >= 0:
-                        remains -= 1
-            elif remains == 0:
-                if not res or right - left + 1 < len(res):
-                    res = s[left:right + 1]
-                if s[left] in count:
-                    count[s[left]] += 1
-                    if count[s[left]] > 0:
+            # When we have all the chars in t in the sliding window,
+            # keep moving the left pointer and update the answer
+            while l <= r and remains == 0:
+                ch = s[l]
+                if ch in count:
+                    count[ch] += 1
+                    if count[ch] > 0:
                         remains += 1
-                left += 1
+                if not ans or r - l + 1 < len(ans):
+                    ans = s[l : r + 1]
+                l += 1
 
-        return res
+            # Keep moving the right pointer
+            r += 1
+
+        return ans
+
+# Time complexity: O(S + T) where S is len(s) and T is len(t)
+# Space complexity: O(T) when T has all unique characters
