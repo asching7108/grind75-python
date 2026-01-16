@@ -4,9 +4,11 @@ class Solution:
         mappings = {")": "(", "]": "[", "}": "{"}
         for char in s:
             if char in mappings:
-                top_element = stack.pop() if stack else "#"
-                if mappings[char] != top_element:
+                if not stack or stack.pop() != mappings[char]:
                     return False
             else:
                 stack.append(char)
         return not stack
+
+# Time complexity: O(n)
+# Space complexity: O(n)
