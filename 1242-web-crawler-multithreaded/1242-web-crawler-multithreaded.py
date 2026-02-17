@@ -44,3 +44,8 @@ class Solution:
                         futures.add(executor.submit(process, url))
 
         return list(seen)
+
+# N = number of pages
+# E = total links
+# Time Complexity: O((N + E) / workers)
+# Space Complexity: O(N + workers)
